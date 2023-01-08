@@ -8,7 +8,7 @@ import (
 	"time"
 )
 
-const version = "v0.0.1"
+const version = "v0.0.3"
 
 type numaa [][]string
 
