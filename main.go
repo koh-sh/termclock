@@ -3,6 +3,7 @@ package main
 import (
 	"flag"
 	"fmt"
+	"log"
 	"os"
 	"strings"
 	"time"
@@ -147,11 +148,20 @@ func (na numaa) merge(na1 numaa) numaa {
 func main() {
 	v := flag.Bool("version", false, "Show version")
 	ns := flag.Bool("nosec", false, "Not print second on the clock")
+	t := flag.String("timezone", "", "Specify timezone \nEx) Asia/Tokyo")
 	flag.Parse()
 
 	if *v {
 		fmt.Printf("%s %s\n", os.Args[0], version)
 		os.Exit(0)
+	}
+
+	if *t != "" {
+		tz, err := time.LoadLocation(*t)
+		if err != nil {
+			log.Fatal(err)
+		}
+		time.Local = tz
 	}
 
 	fmt.Println("")
