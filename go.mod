@@ -1,3 +1,3 @@
-module github.com/koh-sh/termclock
+module main
 
 go 1.19
