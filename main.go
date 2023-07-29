@@ -11,13 +11,13 @@ import (
 
 const version = "v0.1.0"
 
-type numaa [][]string
+type numAa [][]string
 
-func NewNumaa(n int) numaa {
+func NewNumAa(n int) numAa {
 	// note: sed -e 's/ /" ",/g' -e 's/#/"#",/g' -e 's/^/{/g' -e 's/,$/},/g'
 	switch n {
 	case 1:
-		return numaa{
+		return numAa{
 			{" ", " ", " ", "#", " ", " ", " ", " "},
 			{" ", " ", "#", "#", " ", " ", " ", " "},
 			{" ", "#", " ", "#", " ", " ", " ", " "},
@@ -27,7 +27,7 @@ func NewNumaa(n int) numaa {
 			{" ", "#", "#", "#", "#", "#", " ", " "},
 		}
 	case 2:
-		return numaa{
+		return numAa{
 			{" ", "#", "#", "#", "#", "#", " ", " "},
 			{"#", " ", " ", " ", " ", " ", "#", " "},
 			{" ", " ", " ", " ", " ", " ", "#", " "},
@@ -37,7 +37,7 @@ func NewNumaa(n int) numaa {
 			{"#", "#", "#", "#", "#", "#", "#", " "},
 		}
 	case 3:
-		return numaa{
+		return numAa{
 			{" ", "#", "#", "#", "#", "#", " ", " "},
 			{"#", " ", " ", " ", " ", " ", "#", " "},
 			{" ", " ", " ", " ", " ", " ", "#", " "},
@@ -47,7 +47,7 @@ func NewNumaa(n int) numaa {
 			{" ", "#", "#", "#", "#", "#", " ", " "},
 		}
 	case 4:
-		return numaa{
+		return numAa{
 			{"#", " ", " ", " ", " ", " ", " ", " "},
 			{"#", " ", " ", " ", " ", "#", " ", " "},
 			{"#", " ", " ", " ", " ", "#", " ", " "},
@@ -57,7 +57,7 @@ func NewNumaa(n int) numaa {
 			{" ", " ", " ", " ", " ", "#", " ", " "},
 		}
 	case 5:
-		return numaa{
+		return numAa{
 			{"#", "#", "#", "#", "#", "#", "#", " "},
 			{"#", " ", " ", " ", " ", " ", " ", " "},
 			{"#", " ", " ", " ", " ", " ", " ", " "},
@@ -67,7 +67,7 @@ func NewNumaa(n int) numaa {
 			{" ", "#", "#", "#", "#", "#", " ", " "},
 		}
 	case 6:
-		return numaa{
+		return numAa{
 			{" ", "#", "#", "#", "#", "#", " ", " "},
 			{"#", " ", " ", " ", " ", " ", "#", " "},
 			{"#", " ", " ", " ", " ", " ", " ", " "},
@@ -77,7 +77,7 @@ func NewNumaa(n int) numaa {
 			{" ", "#", "#", "#", "#", "#", " ", " "},
 		}
 	case 7:
-		return numaa{
+		return numAa{
 			{"#", "#", "#", "#", "#", "#", "#", " "},
 			{"#", " ", " ", " ", " ", "#", " ", " "},
 			{" ", " ", " ", " ", "#", " ", " ", " "},
@@ -87,7 +87,7 @@ func NewNumaa(n int) numaa {
 			{" ", " ", "#", " ", " ", " ", " ", " "},
 		}
 	case 8:
-		return numaa{
+		return numAa{
 			{" ", "#", "#", "#", "#", "#", " ", " "},
 			{"#", " ", " ", " ", " ", " ", "#", " "},
 			{"#", " ", " ", " ", " ", " ", "#", " "},
@@ -97,7 +97,7 @@ func NewNumaa(n int) numaa {
 			{" ", "#", "#", "#", "#", "#", " ", " "},
 		}
 	case 9:
-		return numaa{
+		return numAa{
 			{" ", "#", "#", "#", "#", "#", " ", " "},
 			{"#", " ", " ", " ", " ", " ", "#", " "},
 			{"#", " ", " ", " ", " ", " ", "#", " "},
@@ -107,7 +107,7 @@ func NewNumaa(n int) numaa {
 			{" ", "#", "#", "#", "#", "#", " ", " "},
 		}
 	case 0:
-		return numaa{
+		return numAa{
 			{" ", " ", "#", "#", "#", " ", " ", " "},
 			{" ", "#", " ", " ", " ", "#", " ", " "},
 			{"#", " ", " ", " ", " ", " ", "#", " "},
@@ -117,7 +117,7 @@ func NewNumaa(n int) numaa {
 			{" ", " ", "#", "#", "#", " ", " ", " "},
 		}
 	default: // colon
-		return numaa{
+		return numAa{
 			{" ", " ", " ", " ", " "},
 			{" ", " ", "#", " ", " "},
 			{" ", " ", "#", " ", " "},
@@ -129,7 +129,7 @@ func NewNumaa(n int) numaa {
 	}
 }
 
-func (na numaa) join() string {
+func (na numAa) join() string {
 	var s string
 	for i := 0; i < len(na); i++ {
 		r := strings.Join(na[i], "")
@@ -138,7 +138,7 @@ func (na numaa) join() string {
 	return s
 }
 
-func (na numaa) merge(na1 numaa) numaa {
+func (na numAa) merge(na1 numAa) numAa {
 	for i := 0; i < len(na); i++ {
 		na[i] = append(na[i], na1[i]...)
 	}
@@ -167,15 +167,15 @@ func main() {
 	fmt.Println("")
 	for {
 		now := time.Now()
-		h1 := NewNumaa(now.Hour() / 10)
-		h2 := NewNumaa(now.Hour() % 10)
-		m1 := NewNumaa(now.Minute() / 10)
-		m2 := NewNumaa(now.Minute() % 10)
-		colon := NewNumaa(10) // colon
+		h1 := NewNumAa(now.Hour() / 10)
+		h2 := NewNumAa(now.Hour() % 10)
+		m1 := NewNumAa(now.Minute() / 10)
+		m2 := NewNumAa(now.Minute() % 10)
+		colon := NewNumAa(10) // colon
 		h1.merge(h2).merge(colon).merge(m1).merge(m2)
 		if !*ns {
-			s1 := NewNumaa(now.Second() / 10)
-			s2 := NewNumaa(now.Second() % 10)
+			s1 := NewNumAa(now.Second() / 10)
+			s2 := NewNumAa(now.Second() % 10)
 			h1.merge(colon).merge(s1).merge(s2)
 		}
 		fmt.Printf("%s\033[%dA", h1.join(), len(h1))

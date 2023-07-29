@@ -5,18 +5,18 @@ import (
 	"testing"
 )
 
-func TestNewNumaa(t *testing.T) {
+func TestNewNumAa(t *testing.T) {
 	type args struct {
 		n int
 	}
 	tests := []struct {
 		name string
 		args args
-		want numaa
+		want numAa
 	}{
 		{name: "three",
 			args: args{3},
-			want: numaa{
+			want: numAa{
 				{" ", "#", "#", "#", "#", "#", " ", " "},
 				{"#", " ", " ", " ", " ", " ", "#", " "},
 				{" ", " ", " ", " ", " ", " ", "#", " "},
@@ -27,7 +27,7 @@ func TestNewNumaa(t *testing.T) {
 			}},
 		{name: "zero",
 			args: args{0},
-			want: numaa{
+			want: numAa{
 				{" ", " ", "#", "#", "#", " ", " ", " "},
 				{" ", "#", " ", " ", " ", "#", " ", " "},
 				{"#", " ", " ", " ", " ", " ", "#", " "},
@@ -38,7 +38,7 @@ func TestNewNumaa(t *testing.T) {
 			}},
 		{name: "colon",
 			args: args{10},
-			want: numaa{
+			want: numAa{
 				{" ", " ", " ", " ", " "},
 				{" ", " ", "#", " ", " "},
 				{" ", " ", "#", " ", " "},
@@ -50,28 +50,28 @@ func TestNewNumaa(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := NewNumaa(tt.args.n); !reflect.DeepEqual(got, tt.want) {
-				t.Errorf("NewNumaa() = %v, want %v", got, tt.want)
+			if got := NewNumAa(tt.args.n); !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("NewNumAa() = %v, want %v", got, tt.want)
 			}
 		})
 	}
-	// check length of numaa
-	base := len(NewNumaa(0))
+	// check length of numAa
+	base := len(NewNumAa(0))
 	for i := 1; i < 11; i++ {
-		if base != len(NewNumaa(i)) {
-			t.Errorf("len(NewNumaa(%d) = %d, want %d", i, base, len(NewNumaa(i)))
+		if base != len(NewNumAa(i)) {
+			t.Errorf("len(NewNumAa(%d) = %d, want %d", i, base, len(NewNumAa(i)))
 		}
 	}
 }
 
-func Test_numaa_join(t *testing.T) {
+func Test_numAa_join(t *testing.T) {
 	tests := []struct {
 		name string
-		na   numaa
+		na   numAa
 		want string
 	}{
 		{name: "test one",
-			na: NewNumaa(1),
+			na: NewNumAa(1),
 			want: `   #    
   ##    
  # #    
@@ -81,7 +81,7 @@ func Test_numaa_join(t *testing.T) {
  #####  
 `},
 		{name: "test five",
-			na: NewNumaa(5),
+			na: NewNumAa(5),
 			want: `####### 
 #       
 #       
@@ -91,7 +91,7 @@ func Test_numaa_join(t *testing.T) {
  #####  
 `},
 		{name: "test colon",
-			na: NewNumaa(10),
+			na: NewNumAa(10),
 			want: `     
   #  
   #  
@@ -104,26 +104,26 @@ func Test_numaa_join(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			if got := tt.na.join(); got != tt.want {
-				t.Errorf("numaa.join() = %v, want %v", got, tt.want)
+				t.Errorf("numAa.join() = %v, want %v", got, tt.want)
 			}
 		})
 	}
 }
 
-func Test_numaa_merge(t *testing.T) {
+func Test_numAa_merge(t *testing.T) {
 	type args struct {
-		na1 numaa
+		na1 numAa
 	}
 	tests := []struct {
 		name string
-		na   numaa
+		na   numAa
 		args args
-		want numaa
+		want numAa
 	}{
 		{name: "one merge two",
-			na:   NewNumaa(1),
-			args: args{NewNumaa(2)},
-			want: numaa{
+			na:   NewNumAa(1),
+			args: args{NewNumAa(2)},
+			want: numAa{
 				{" ", " ", " ", "#", " ", " ", " ", " ", " ", "#", "#", "#", "#", "#", " ", " "},
 				{" ", " ", "#", "#", " ", " ", " ", " ", "#", " ", " ", " ", " ", " ", "#", " "},
 				{" ", "#", " ", "#", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "#", " "},
@@ -133,9 +133,9 @@ func Test_numaa_merge(t *testing.T) {
 				{" ", "#", "#", "#", "#", "#", " ", " ", "#", "#", "#", "#", "#", "#", "#", " "},
 			}},
 		{name: "five merge seven",
-			na:   NewNumaa(5),
-			args: args{NewNumaa(7)},
-			want: numaa{
+			na:   NewNumAa(5),
+			args: args{NewNumAa(7)},
+			want: numAa{
 				{"#", "#", "#", "#", "#", "#", "#", " ", "#", "#", "#", "#", "#", "#", "#", " "},
 				{"#", " ", " ", " ", " ", " ", " ", " ", "#", " ", " ", " ", " ", "#", " ", " "},
 				{"#", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "#", " ", " ", " "},
@@ -148,7 +148,7 @@ func Test_numaa_merge(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			if got := tt.na.merge(tt.args.na1); !reflect.DeepEqual(got, tt.want) {
-				t.Errorf("numaa.merge() = %v, want %v", got, tt.want)
+				t.Errorf("numAa.merge() = %v, want %v", got, tt.want)
 			}
 		})
 	}
